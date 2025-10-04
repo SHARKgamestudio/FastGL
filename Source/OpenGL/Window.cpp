@@ -1,0 +1,53 @@
+#include "Window.h"
+
+#include <stdexcept>
+#include <iostream>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include "Error.h"
+
+void glfwErrorCallback(int error, const char* description) {
+	std::cout << "[ERROR] : " << description << "\n";
+}
+
+namespace OpenGL {
+	Window::Window(unsigned int width, unsigned int height, const char* title) {
+		if (width < MIN_WIDTH || height < MIN_HEIGHT)
+			throw std::runtime_error("[ERROR] : Tried to initialize window with a size wich is to small.");
+
+		if (!glfwInit())
+			throw std::runtime_error("[ERROR] : There was an error initializing GLFW.");
+
+		m_window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+		if (!m_window)
+			throw std::runtime_error("[ERROR] : There was an error creating the GLFW window.");
+
+		glfwMakeContextCurrent(m_window);
+
+		if (glewInit() != GLEW_OK)
+			throw std::runtime_error("[ERROR] : There was an error initializing GLEW.");
+	}
+
+	Window::~Window() {
+		glfwDestroyWindow(m_window);
+		glfwTerminate();
+	}
+
+	bool Window::shouldClose() const {
+		return glfwWindowShouldClose(m_window);
+	}
+
+	void Window::pollEvents() {
+		glfwPollEvents();
+	}
+
+	void Window::clear() {
+		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
+	}
+
+	void Window::swapBuffers() {
+		glfwSwapBuffers(m_window);
+	}
+}

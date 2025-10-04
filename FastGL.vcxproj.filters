@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\Entry.cpp" />
+    <ClCompile Include="Source\OpenGL\Window.cpp" />
+    <ClCompile Include="Source\OpenGL\Object.cpp" />
+    <ClCompile Include="Source\OpenGL\VAO.cpp" />
+    <ClCompile Include="Source\OpenGL\VBO.cpp" />
+    <ClCompile Include="Source\OpenGL\IBO.cpp" />
+    <ClCompile Include="Source\OpenGL\Shader.cpp" />
+    <ClCompile Include="Source\OpenGL\ShaderProgram.cpp" />
+    <ClCompile Include="Source\OpenGL\Error.cpp" />
+    <ClCompile Include="Source\OpenGL\VBL.cpp" />
+    <ClCompile Include="Source\OpenGL\Types.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\OpenGL\Window.h" />
+    <ClInclude Include="Source\OpenGL\Object.h" />
+    <ClInclude Include="Source\OpenGL\VAO.h" />
+    <ClInclude Include="Source\OpenGL\VBO.h" />
+    <ClInclude Include="Source\OpenGL\IBO.h" />
+    <ClInclude Include="Source\OpenGL\Shader.h" />
+    <ClInclude Include="Source\OpenGL\ShaderProgram.h" />
+    <ClInclude Include="Source\OpenGL\Error.h" />
+    <ClInclude Include="Source\OpenGL\VBL.h" />
+    <ClInclude Include="Source\OpenGL\Types.h" />
+    <ClInclude Include="Source\OpenGL\IBindable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\default.shader" />
+    <None Include="Shaders\default.frag" />
+    <None Include="Shaders\default.vert" />
+    <None Include="Source\OpenGL\VBL.inl" />
+    <None Include="Source\OpenGL\ShaderProgram.inl" />
+  </ItemGroup>
+</Project>

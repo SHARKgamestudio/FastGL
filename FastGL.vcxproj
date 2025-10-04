@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{84f6ad4a-ca35-4069-8080-775b234d1cc2}</ProjectGuid>
+    <RootNamespace>FastGL</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)Bin\Build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Bin\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)Bin\Build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Bin\Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLFW\include;C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLFW\lib;C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLEW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;user32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLFW\include;C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLFW\lib;C:\Users\AMD\Documents\Visual Studio 2022\Projects\FastGL\Vendor\GLEW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;user32.lib;glfw3.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Entry.cpp" />
+    <ClCompile Include="Source\OpenGL\Error.cpp" />
+    <ClCompile Include="Source\OpenGL\IBO.cpp" />
+    <ClCompile Include="Source\OpenGL\Object.cpp" />
+    <ClCompile Include="Source\OpenGL\Shader.cpp" />
+    <ClCompile Include="Source\OpenGL\ShaderProgram.cpp" />
+    <ClCompile Include="Source\OpenGL\Types.cpp" />
+    <ClCompile Include="Source\OpenGL\VAO.cpp" />
+    <ClCompile Include="Source\OpenGL\VBO.cpp" />
+    <ClCompile Include="Source\OpenGL\Window.cpp" />
+    <ClCompile Include="Source\OpenGL\VBL.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\OpenGL\Error.h" />
+    <ClInclude Include="Source\OpenGL\IBindable.h" />
+    <ClInclude Include="Source\OpenGL\IBO.h" />
+    <ClInclude Include="Source\OpenGL\Object.h" />
+    <ClInclude Include="Source\OpenGL\Shader.h" />
+    <ClInclude Include="Source\OpenGL\ShaderProgram.h" />
+    <ClInclude Include="Source\OpenGL\Types.h" />
+    <ClInclude Include="Source\OpenGL\VAO.h" />
+    <ClInclude Include="Source\OpenGL\VBO.h" />
+    <ClInclude Include="Source\OpenGL\Window.h" />
+    <ClInclude Include="Source\OpenGL\VBL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\default.frag" />
+    <None Include="Shaders\default.shader" />
+    <None Include="Shaders\default.vert" />
+    <None Include="Source\OpenGL\ShaderProgram.inl" />
+    <None Include="Source\OpenGL\VBL.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
