@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 namespace OpenGL {
-	IBO::IBO(unsigned int count, const unsigned int* data, DrawType usage) {
+	IBO::IBO(unsigned int count, const unsigned int* data, DrawType usage) : Object() {
 		this->count = count;
 		GL_CALL(glGenBuffers(1, &id));
 		GL_CALL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id));

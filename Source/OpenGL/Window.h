@@ -6,6 +6,10 @@
 struct GLFWwindow;
 
 namespace OpenGL {
+	class VAO;
+	class IBO;
+	class ShaderProgram;
+
 	class Window {
 	public:
 		Window(unsigned int width, unsigned int height, const char* title);
@@ -17,7 +21,7 @@ namespace OpenGL {
 		void swapBuffers();
 
 		void clear();
-		//void draw();
+		void draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program);
 	protected:
 	private:
 		GLFWwindow* m_window;

@@ -15,7 +15,7 @@ namespace OpenGL {
 		void bind() const override;
 		void unbind() const override;
 
-		void add(const VBO& vbo, const VBL& layout);
+		void addBuffer(const VBO& vbo, const VBL& layout);
 	protected:
 	private:
 	};

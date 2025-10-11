@@ -9,7 +9,8 @@
 #include <iostream>
 
 namespace OpenGL {
-	ShaderProgram::ShaderProgram() {
+	ShaderProgram::ShaderProgram() : Object() {
+		linked = false;
 		GL_CALL(id = glCreateProgram());
 		GL_CALL(glBindFragDataLocation(id, 0, "outColor"));
 	}
@@ -23,16 +24,21 @@ namespace OpenGL {
 	}
 
 	void ShaderProgram::bind() const {
-		GL_CALL(glLinkProgram(id));
+		#ifdef GL_AUTO_LINK_PROGRAM
+		link();
+		#endif
 		GL_CALL(glUseProgram(id));
 	}
 
 	void ShaderProgram::unbind() const {
-		GL_CALL(glLinkProgram(0));
 		GL_CALL(glUseProgram(0));
 	}
 
 	int ShaderProgram::getUniformLocation(const char* name) {
+		#ifdef GL_AUTO_BIND_PROGRAM
+		bind();
+		#endif
+
 		if (locations.find(name) != locations.end()) {
 			return locations[name];
 		}
@@ -42,5 +48,12 @@ namespace OpenGL {
 			std::cout << "[OpenGL] WARNING : uniform '" << name << "' doesn't exist, on shader '" << id << "' !\n";
 		locations[name] = location;
 		return location;
+	}
+
+	void ShaderProgram::link() const
+	{
+		if (linked) return;
+		GL_CALL(glLinkProgram(id));
+		linked = true;
 	}
 }

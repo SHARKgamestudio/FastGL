@@ -6,12 +6,11 @@
 #include <unordered_map>
 #include <string>
 
+#define GL_AUTO_LINK_PROGRAM
+#define GL_AUTO_BIND_PROGRAM
+
 namespace OpenGL {
 	class Shader;
-
-	struct float4 {
-		float x, y, z, w;
-	};
 
 	class ShaderProgram : public Object, public IBindable {
 	public:
@@ -29,6 +28,9 @@ namespace OpenGL {
 	private:
 		std::unordered_map<const char*, int> locations;
 		int getUniformLocation(const char* name);
+
+		mutable bool linked;
+		void link() const;
 	};
 }
 

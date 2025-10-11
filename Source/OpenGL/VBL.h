@@ -19,7 +19,7 @@ namespace OpenGL {
 		VBL();
 
 		template <typename T>
-		void add(unsigned int count);
+		void addElement(unsigned int count);
 
 		unsigned int getStride() const;
 		const std::vector<VBLE>& getElements() const;

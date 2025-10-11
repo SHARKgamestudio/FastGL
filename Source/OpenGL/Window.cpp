@@ -8,6 +8,10 @@
 
 #include "Error.h"
 
+#include "VAO.h"
+#include "IBO.h"
+#include "ShaderProgram.h"
+
 void glfwErrorCallback(int error, const char* description) {
 	std::cout << "[ERROR] : " << description << "\n";
 }
@@ -45,6 +49,15 @@ namespace OpenGL {
 
 	void Window::clear() {
 		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
+	}
+
+	void Window::draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program)
+	{
+		program.bind();
+		vao.bind();
+		ibo.bind();
+
+		GL_CALL(glDrawElements(GL_TRIANGLES, ibo.getDataCount(), GL_UNSIGNED_INT, nullptr));
 	}
 
 	void Window::swapBuffers() {

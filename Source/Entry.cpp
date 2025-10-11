@@ -1,8 +1,3 @@
-#include <iostream>
-
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include "OpenGL/Error.h"
 #include "OpenGL/types.h"
 
@@ -26,7 +21,7 @@ int main() {
 	// DATA
 	OpenGL::CombinedShaderSrc src =
 		OpenGL::getCombinedShaderSrcFromFile(
-			"C:/Users/AMD/Documents/Visual Studio 2022/Projects/FastGL/Shaders/default.shader"
+			"Shaders/default.shader"
 		);
 
 	float vertices[8] = {
@@ -48,21 +43,22 @@ int main() {
 	OpenGL::VAO vao;
 
 	OpenGL::VBO vbo(sizeof(vertices), vertices, OpenGL::DrawType::STATIC);
+
 	OpenGL::VBL vbl;
-	vbl.add<float>(2);
-	vao.add(vbo, vbl);
+	vbl.addElement<float>(2);
+
+	vao.addBuffer(vbo, vbl);
 
 	OpenGL::IBO ibo(6, indices, OpenGL::DrawType::STATIC);
 
 	// COMPILING SHADERS
-	OpenGL::Shader vertsh(src.vert, OpenGL::ShaderType::VERTEX);
-	OpenGL::Shader fragsh(src.frag, OpenGL::ShaderType::FRAGMENT);
+	OpenGL::Shader vert(src.vert, OpenGL::ShaderType::VERTEX);
+	OpenGL::Shader frag(src.frag, OpenGL::ShaderType::FRAGMENT);
 
 	// CREATING SHADER PROGRAM
 	OpenGL::ShaderProgram program;
-	program.attachShader(vertsh);
-	program.attachShader(fragsh);
-	program.bind();
+	program.attachShader(vert);
+	program.attachShader(frag);
 
 	program.setUniform<float>("u_R", 1.0f);
 
@@ -74,19 +70,14 @@ int main() {
 
 		if (time >= 1) direction = -1;
 		else if (time <= 0) direction = 1;
-
 		time += direction * 0.05f;
 
 		window.clear();
 
-		//program.bind();
-		//program.setUniform<float>("u_R", time);
-
 		program.bind();
-		vao.bind();
-		ibo.bind();
+		program.setUniform<float>("u_R", time);
 
-		GL_CALL(glDrawElements(GL_TRIANGLES, ibo.getDataCount(), GL_UNSIGNED_INT, nullptr));
+		window.draw(vao, ibo, program);
 
 		window.swapBuffers();
 	}

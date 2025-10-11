@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 namespace OpenGL {
-	VAO::VAO() {
+	VAO::VAO() : Object() {
 		GL_CALL(glGenVertexArrays(1, &id));
 		GL_CALL(glBindVertexArray(id));
 	}
@@ -22,7 +22,7 @@ namespace OpenGL {
 		GL_CALL(glBindVertexArray(0));
 	}
 
-	void VAO::add(const VBO& vbo, const VBL& layout) {
+	void VAO::addBuffer(const VBO& vbo, const VBL& layout) {
 		vbo.bind();
 
 		const std::vector<VBLE>& elements = layout.getElements();
@@ -30,7 +30,8 @@ namespace OpenGL {
 		for (unsigned int i = 0; i < elements.size(); i++) {
 			const VBLE& element = elements[i];
 			GL_CALL(glEnableVertexAttribArray(i));
-			GL_CALL(glVertexAttribPointer(i, element.count, (unsigned int)element.type, element.normalized, layout.getStride(), (const void*)offset));
+			GL_CALL(glVertexAttribPointer(i, element.count, (unsigned int)element.type, element.normalized, 
+				layout.getStride(), reinterpret_cast<const void*>(static_cast<uintptr_t>(offset))));
 			offset += element.count * (unsigned int)getTypeSize(element.type);
 		}
 	}

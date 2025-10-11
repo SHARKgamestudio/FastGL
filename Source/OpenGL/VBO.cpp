@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 
 namespace OpenGL {
-	VBO::VBO(__int64 size, const void* data, DrawType usage) {
+	VBO::VBO(__int64 size, const void* data, DrawType usage) : Object() {
 		GL_CALL(glGenBuffers(1, &id));
 		GL_CALL(glBindBuffer(GL_ARRAY_BUFFER, id));
 		GL_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, (unsigned int)usage));

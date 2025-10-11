@@ -63,7 +63,7 @@ namespace OpenGL {
 		return src[0].str();
 	}
 
-	Shader::Shader(const std::string& src, ShaderType type) {
+	Shader::Shader(const std::string& src, ShaderType type) : Object() {
 		GL_CALL(id = glCreateShader((unsigned int)type));
 		const char* translated = src.c_str();
 		GL_CALL(glShaderSource(id, 1, &translated, nullptr));
@@ -84,9 +84,5 @@ namespace OpenGL {
 
 	Shader::~Shader() {
 		GL_CALL(glDeleteShader(id));
-	}
-
-	unsigned int Shader::getID() const {
-		return id;
 	}
 }
