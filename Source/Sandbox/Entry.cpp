@@ -1,13 +1,4 @@
-#include "OpenGL/Error.h"
-#include "OpenGL/types.h"
-
-#include "OpenGL/Window.h"
-#include "OpenGL/VAO.h"
-#include "OpenGL/VBO.h"
-#include "OpenGL/IBO.h"
-#include "OpenGL/VBL.h"
-#include "OpenGL/Shader.h"
-#include "OpenGL/ShaderProgram.h"
+#include <OpenGL.h>
 
 #define WINDOW_WIDTH	800
 #define WINDOW_HEIGHT	600
@@ -21,7 +12,7 @@ int main() {
 	// DATA
 	OpenGL::CombinedShaderSrc src =
 		OpenGL::getCombinedShaderSrcFromFile(
-			"Shaders/default.shader"
+			"../../Shaders/default.shader"
 		);
 
 	float vertices[8] = {
