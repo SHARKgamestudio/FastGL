@@ -61,7 +61,6 @@ Simply open the `Sandbox` project, and that's it, you are done ! Have fun learni
 
 ### 4️⃣ Code Example :
 ```cpp
-Copier le code
 #include <OpenGL.h>
 
 int main() {
