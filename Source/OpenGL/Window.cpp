@@ -47,6 +47,10 @@ namespace OpenGL {
 		glfwPollEvents();
 	}
 
+	void Window::clear(const Color& color) {
+		GL_CALL(glClearColor(color.r, color.g, color.b, color.a));
+	}
+
 	void Window::clear() {
 		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	}

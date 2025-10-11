@@ -6,6 +6,9 @@
 #include "Types.h"
 
 namespace OpenGL {
+	/// <summary>
+	/// Index Buffer object, used to store indices for indexed drawing.
+	/// </summary>
 	class IBO : public Object, public IBindable {
 	public:
 		IBO(unsigned int count, const unsigned int* data, DrawType usage = DrawType::STATIC);
@@ -14,10 +17,12 @@ namespace OpenGL {
 		void bind() const override;
 		void unbind() const override;
 
+		/// <summary>
+		/// Get the number of indices stored in the IBO.
+		/// </summary>
 		unsigned int getDataCount() const;
 
-	protected:
-		unsigned int count;
 	private:
+		unsigned int count;
 	};
 }
