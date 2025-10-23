@@ -10,19 +10,25 @@
 
 int main() {
 	// DATA
-	OpenGL::CombinedShaderSrc src =
+	OpenGL::CombinedShaderSrc shader_src =
 		OpenGL::getCombinedShaderSrcFromFile(
 			"../../Shaders/default.shader"
 		);
 
-	float vertices[8] = {
-		-0.5f, -0.5f,
-		 0.5f, -0.5f,
-		 0.5f,  0.5f,
-		-0.5f,  0.5f,
+	OpenGL::TextureSrc texture_src =
+		OpenGL::getTextureSrcFromFile(
+			"../../Textures/default.png"
+		);
+
+	float vertices[] = {
+	   //Position   //TexCoords
+		-0.5f, -0.5f, 0.0f, 0.0f,
+		 0.5f, -0.5f, 1.0f, 0.0f,
+		 0.5f,  0.5f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f,
 	};
 
-	unsigned int indices[6]{
+	unsigned int indices[]{
 		0, 1, 2,
 		2, 3, 0,
 	};
@@ -37,36 +43,31 @@ int main() {
 
 	OpenGL::VBL vbl;
 	vbl.addElement<float>(2);
+	vbl.addElement<float>(2);
 
 	vao.addBuffer(vbo, vbl);
 
 	OpenGL::IBO ibo(6, indices, OpenGL::DrawType::STATIC);
 
 	// COMPILING SHADERS
-	OpenGL::Shader vert(src.vert, OpenGL::ShaderType::VERTEX);
-	OpenGL::Shader frag(src.frag, OpenGL::ShaderType::FRAGMENT);
+	OpenGL::Shader vert(shader_src.vert, OpenGL::ShaderType::VERTEX);
+	OpenGL::Shader frag(shader_src.frag, OpenGL::ShaderType::FRAGMENT);
 
 	// CREATING SHADER PROGRAM
 	OpenGL::ShaderProgram program;
 	program.attachShader(vert);
 	program.attachShader(frag);
 
-	program.setUniform<float>("u_R", 1.0f);
+	program.setUniform<int>("u_Texture", 0);
 
-	float time = 0;
-	int direction = 1;
+	// CREATING TEXTURES
+	OpenGL::Texture texture(texture_src);
+	texture.bind();
 
 	while (!window.shouldClose()) {
 		window.pollEvents();
 
-		if (time >= 1) direction = -1;
-		else if (time <= 0) direction = 1;
-		time += direction * 0.05f;
-
 		window.clear();
-
-		program.bind();
-		program.setUniform<float>("u_R", time);
 
 		window.draw(vao, ibo, program);
 

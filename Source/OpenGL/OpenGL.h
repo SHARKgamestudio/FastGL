@@ -1,10 +1,16 @@
+#pragma once
+
 #include "Error.h"
 #include "types.h"
 
 #include "Window.h"
+
 #include "VAO.h"
 #include "VBO.h"
 #include "IBO.h"
 #include "VBL.h"
+
+#include "Texture.h"
+
 #include "Shader.h"
 #include "ShaderProgram.h"

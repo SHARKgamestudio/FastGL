@@ -12,6 +12,7 @@
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="IBO.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h" />
@@ -25,6 +26,7 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="IBindable.h" />
     <ClInclude Include="IBO.h" />
+    <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ShaderProgram.inl" />

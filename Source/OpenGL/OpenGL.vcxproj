@@ -17,6 +17,7 @@
     <ClCompile Include="OpenGL.h" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Types.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBL.cpp" />
@@ -30,6 +31,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBL.h" />
@@ -91,7 +93,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
-      <AdditionalIncludeDirectories>$(SolutionDir)Vendor\GLFW\include;$(SolutionDir)Vendor\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Vendor\GLFW\include;$(SolutionDir)Vendor\GLEW\include;$(SolutionDir)Vendor\STBI\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -111,7 +113,7 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
-      <AdditionalIncludeDirectories>$(SolutionDir)Vendor\GLFW\include;$(SolutionDir)Vendor\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Vendor\GLFW\include;$(SolutionDir)Vendor\GLEW\include;$(SolutionDir)Vendor\STBI\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>

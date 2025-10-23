@@ -24,6 +24,10 @@ namespace OpenGL {
 		if (!glfwInit())
 			throw std::runtime_error("[ERROR] : There was an error initializing GLFW.");
 
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 		m_window = glfwCreateWindow(width, height, title, nullptr, nullptr);
 		if (!m_window)
 			throw std::runtime_error("[ERROR] : There was an error creating the GLFW window.");
@@ -32,6 +36,9 @@ namespace OpenGL {
 
 		if (glewInit() != GLEW_OK)
 			throw std::runtime_error("[ERROR] : There was an error initializing GLEW.");
+
+		GL_CALL(glEnable(GL_BLEND));
+		GL_CALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
 	}
 
 	Window::~Window() {
