@@ -77,7 +77,7 @@ namespace OpenGL {
 			GL_CALL(glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length));
 			char* message = (char*)_malloca(length * sizeof(char));
 			GL_CALL(glGetShaderInfoLog(id, length, &length, message));
-			std::cerr << "[OpenGL] ERROR -1 : " << message << "\n";
+			GL_LOG_ERROR(message);
 			GL_CALL(glDeleteShader(id));
 		}
 	}

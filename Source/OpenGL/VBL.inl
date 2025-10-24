@@ -12,7 +12,7 @@ inline void VBL::addElement<type>(unsigned int count) {		\
 namespace OpenGL {
 	template<typename T>
 	inline void VBL::addElement(unsigned int count) {
-		GL_ASSERT(false);
+		GL_LOG_ERROR("Unsupported VBL element type.");
 	}
 
 	GL_INTERNAL_VBL_ADD_TYPE(float, Type::FLOAT, false)

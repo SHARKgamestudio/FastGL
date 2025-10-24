@@ -8,8 +8,7 @@
 namespace OpenGL {
 	template<typename T>
 	inline void ShaderProgram::setUniform(const std::string& name, T value) {
-		std::cout << "[OpenGL] ERROR : Unsupported uniform type in ShaderProgram::setUniform<" << typeid(T).name() << ">\n";
-		GL_ASSERT(false);
+		GL_LOG_ERROR("Unsupported uniform type.");
 	}
 	template<>
 	inline void ShaderProgram::setUniform<float>(const std::string& name, float value) {

@@ -46,4 +46,22 @@ namespace OpenGL {
 		NONE	= -1	,
 		STATIC	= 0x88E4
 	};
+
+	/// <summary>
+	/// Types of log messages that the logger can output.
+	/// </summary>
+	enum class LogType {
+		INFO,
+		WARNING,
+		ERROR
+	};
+
+	/// <summary>
+	/// Returns the color code string for a given LogType.
+	/// </summary>
+	const char* getLogTypeColor(LogType type);
+	/// <summary>
+	/// Returns the capitalized string representation of a given LogType.
+	/// </summary>
+	const char* getLogTypeString(LogType type);
 }

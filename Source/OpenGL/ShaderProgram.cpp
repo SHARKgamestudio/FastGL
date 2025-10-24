@@ -45,7 +45,7 @@ namespace OpenGL {
 
 		GL_CALL(int location = glGetUniformLocation(id, name));
 		if (location == -1)
-			std::cout << "[OpenGL] WARNING : uniform '" << name << "' doesn't exist, on shader '" << id << "' !\n";
+			GL_LOG_WARNING(std::string("Uniform '" + std::string(name) + "' does not exist.").c_str());
 		locations[name] = location;
 		return location;
 	}

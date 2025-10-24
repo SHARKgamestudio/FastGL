@@ -29,3 +29,33 @@ unsigned int OpenGL::getShaderTypeIndex(ShaderType type) {
 		return -1;
 	}
 }
+
+const char* OpenGL::getLogTypeColor(LogType type) {
+	switch (type) {
+	case OpenGL::LogType::INFO:
+		return "\033[32m";
+	case OpenGL::LogType::WARNING:
+		return "\033[33m";
+	case OpenGL::LogType::ERROR:
+		return "\033[31m";
+	default:
+		return "\033[0m";
+	}
+}
+
+const char* OpenGL::getLogTypeString(LogType type) {
+	switch (type) {
+	case OpenGL::LogType::INFO:
+		return "INFO";
+		break;
+	case OpenGL::LogType::WARNING:
+		return "WARNING";
+		break;
+	case OpenGL::LogType::ERROR:
+		return "ERROR";
+		break;
+	default:
+		return "UNKNOWN";
+		break;
+	}
+}
