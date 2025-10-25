@@ -69,6 +69,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Vendor\GLFW\lib;$(SolutionDir)Vendor\GLEW\lib;$(SolutionDir)Bin\Build\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;glfw3.lib;glew32s.lib;OpenGL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -86,6 +90,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Vendor\GLFW\lib;$(SolutionDir)Vendor\GLEW\lib;$(SolutionDir)Bin\Build\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;user32.lib;glfw3.lib;glew32s.lib;OpenGL.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Resources" "$(TargetDir)Resources" /E /I /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

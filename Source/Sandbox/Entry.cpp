@@ -15,12 +15,12 @@ int main() {
 	// DATA
 	OpenGL::CombinedShaderSrc shader_src =
 		OpenGL::getCombinedShaderSrcFromFile(
-			"../../Shaders/default.shader"
+			GL_RES_PATH "Shaders/default.shader"
 		);
 
 	OpenGL::TextureSrc texture_src =
 		OpenGL::getTextureSrcFromFile(
-			"../../Textures/default.png"
+			GL_RES_PATH "Textures/default.png"
 		);
 
 	float vertices[] = {
@@ -60,6 +60,7 @@ int main() {
 	OpenGL::ShaderProgram program;
 	program.attachShader(vert);
 	program.attachShader(frag);
+
 
 	float ratio = static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT);
 	glm::mat4 projection = glm::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);

@@ -22,6 +22,7 @@
     <ClCompile Include="Objects\VBO.cpp" />
     <ClCompile Include="Others\Window.cpp" />
     <ClCompile Include="Utils\Error.cpp" />
+    <ClCompile Include="Utils\Path.cpp" />
     <ClCompile Include="Utils\Types.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Others\Window.h" />
     <ClInclude Include="Utils\Error.h" />
+    <ClInclude Include="Utils\Path.h" />
     <ClInclude Include="Utils\Types.h" />
   </ItemGroup>
   <ItemGroup>
