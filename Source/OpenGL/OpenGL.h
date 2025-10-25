@@ -1,16 +1,16 @@
 #pragma once
 
-#include "Error.h"
-#include "types.h"
+#include "Utils/Error.h"
+#include "Utils/Types.h"
 
-#include "Window.h"
+#include "Others/Window.h"
 
-#include "VAO.h"
-#include "VBO.h"
-#include "IBO.h"
-#include "VBL.h"
+#include "Objects/VAO.h"
+#include "Objects/VBO.h"
+#include "Objects/IBO.h"
+#include "Objects/VBL.h"
 
-#include "Texture.h"
+#include "Objects/Texture.h"
 
-#include "Shader.h"
-#include "ShaderProgram.h"
+#include "Objects/Shader.h"
+#include "Objects/ShaderProgram.h"

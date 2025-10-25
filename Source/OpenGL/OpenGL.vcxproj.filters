@@ -1,35 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="OpenGL.h" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
-    <ClCompile Include="Types.cpp" />
-    <ClCompile Include="VAO.cpp" />
-    <ClCompile Include="VBL.cpp" />
-    <ClCompile Include="VBO.cpp" />
-    <ClCompile Include="Window.cpp" />
-    <ClCompile Include="Error.cpp" />
-    <ClCompile Include="IBO.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Common\IBindable.cpp" />
+    <ClCompile Include="Common\Object.cpp" />
+    <ClCompile Include="Objects\IBO.cpp" />
+    <ClCompile Include="Objects\Shader.cpp" />
+    <ClCompile Include="Objects\ShaderProgram.cpp" />
+    <ClCompile Include="Objects\Texture.cpp" />
+    <ClCompile Include="Objects\VAO.cpp" />
+    <ClCompile Include="Objects\VBL.cpp" />
+    <ClCompile Include="Objects\VBO.cpp" />
+    <ClCompile Include="Others\Window.cpp" />
+    <ClCompile Include="Utils\Error.cpp" />
+    <ClCompile Include="Utils\Types.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShaderProgram.h" />
-    <ClInclude Include="Types.h" />
-    <ClInclude Include="VAO.h" />
-    <ClInclude Include="VBL.h" />
-    <ClInclude Include="VBO.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="Error.h" />
-    <ClInclude Include="IBindable.h" />
-    <ClInclude Include="IBO.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="Common\IBindable.h" />
+    <ClInclude Include="Common\Object.h" />
+    <ClInclude Include="Objects\IBO.h" />
+    <ClInclude Include="Objects\Shader.h" />
+    <ClInclude Include="Objects\ShaderProgram.h" />
+    <ClInclude Include="Objects\Texture.h" />
+    <ClInclude Include="Objects\VAO.h" />
+    <ClInclude Include="Objects\VBL.h" />
+    <ClInclude Include="Objects\VBO.h" />
+    <ClInclude Include="Others\Window.h" />
+    <ClInclude Include="Utils\Error.h" />
+    <ClInclude Include="Utils\Types.h" />
+    <ClInclude Include="OpenGL.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ShaderProgram.inl" />
-    <None Include="VBL.inl" />
+    <None Include="Objects\ShaderProgram.inl" />
+    <None Include="Objects\VBL.inl" />
   </ItemGroup>
 </Project>

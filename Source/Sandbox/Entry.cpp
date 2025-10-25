@@ -8,6 +8,9 @@
 #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 #endif
 
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+
 int main() {
 	// DATA
 	OpenGL::CombinedShaderSrc shader_src =
@@ -57,6 +60,11 @@ int main() {
 	OpenGL::ShaderProgram program;
 	program.attachShader(vert);
 	program.attachShader(frag);
+
+	float ratio = static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT);
+	glm::mat4 projection = glm::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
+
+	program.setUniform<glm::mat4>("u_Mvp", projection);
 
 	program.setUniform<int>("u_Texture", 0);
 
