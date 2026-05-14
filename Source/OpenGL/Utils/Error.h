@@ -66,7 +66,7 @@ namespace OpenGL {
 	/// <param name="file">File name where the function is called.</param>
 	/// <param name="line">Line number where the function is called.</param>
 	/// <returns>True if no errors were found, false otherwise.</returns>
-	bool CheckError(const char* function, const char* file, int line);
+	bool CheckError(const char* funcptr, const char* file, int line);
 
 	/// <summary>
 	/// Logs a message with custom format and colors based on the log type.
@@ -77,5 +77,5 @@ namespace OpenGL {
 	/// <param name="function">Name of the function for which the check is performed.</param>
 	/// <param name="file">File name where the function is called.</param>
 	/// <param name="line">Line number where the function is called.</param>
-	void Log(const char* message, LogType type, const char* function, const char* file, int line);
+	void Log(const char* message, LogType type, const char* funcptr, const char* file, int line);
 }

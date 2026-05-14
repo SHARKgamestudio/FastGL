@@ -8,8 +8,10 @@
 #include <STBI/stbimage.h>
 
 namespace OpenGL {
-	TextureSrc getTextureSrcFromFile(const std::string& path) {
-		stbi_set_flip_vertically_on_load(1);
+	TextureSrc getTextureSrcFromFile(const std::string& path, bool flipY) {
+		if (flipY) {
+			stbi_set_flip_vertically_on_load(1);
+		}
 
 		TextureSrc src;
 		src.data = stbi_load(path.c_str(), &src.width, &src.height, &src.channels, 4);

@@ -1,5 +1,9 @@
 #pragma once
 
+#include "../Utils/Event.h"
+
+#include <GLM/vec2.hpp>
+
 /// <summary>
 /// Dont mind this, it's just to avoid idiots from having fun with the window size.
 /// <para> And you are not an idiot, are you ? </para>
@@ -14,11 +18,14 @@
 #define MIN_HEIGHT	64
 
 struct GLFWwindow;
+struct GLFWimage;
 
 namespace OpenGL {
 	class VAO;
 	class IBO;
 	class ShaderProgram;
+
+	struct TextureSrc;
 
 	/// <summary>
 	///	Temporary color structure.
@@ -39,6 +46,8 @@ namespace OpenGL {
 		Window(unsigned int width, unsigned int height, const char* title);
 		~Window();
 
+		Event<int, int> OnResize;
+
 		/// <summary>
 		/// Checks if the window should close.
 		/// <para> Generaly used to know when to exit the main application loop. </para>
@@ -50,6 +59,12 @@ namespace OpenGL {
 		/// Polls for window events using GLFW.
 		/// </summary>
 		void pollEvents();
+
+		/// <summary>
+		/// Get the Width & Height of the window (in px).
+		/// </summary>
+		glm::vec2 getSize();
+
 		/// <summary>
 		/// Swaps the contents of the front and back buffers.
 		/// </summary>
@@ -64,6 +79,8 @@ namespace OpenGL {
 		/// </summary>
 		void clear();
 
+		void setIcon(const TextureSrc& iconSrc);
+
 		/// <summary>
 		/// Draws the given IBO indices of the VAO using the given ShaderProgram.
 		/// <para> This is just an abstraction of 'glDrawElements', you dont need to use this.</para>
@@ -76,5 +93,6 @@ namespace OpenGL {
 
 	private:
 		GLFWwindow* m_window;
+		GLFWimage* m_icon;
 	};
 }

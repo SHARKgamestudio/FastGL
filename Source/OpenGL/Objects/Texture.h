@@ -23,7 +23,7 @@ namespace OpenGL {
 	/// </summary>
 	/// <param name="path">The file-path to the image source (can be .png or .jpg).</param>
 	/// <returns>A TextureSrc object, containing raw pixels and metadata. </returns>
-	TextureSrc getTextureSrcFromFile(const std::string& path);
+	TextureSrc getTextureSrcFromFile(const std::string& path, bool flipY = false);
 
 	/// <summary>
 	/// Texture object, used to create and hold OpenGL textures from raw pixel-data.

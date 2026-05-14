@@ -10,10 +10,18 @@
 
 #include "../Objects/VAO.h"
 #include "../Objects/IBO.h"
+#include "../Objects/Texture.h"
 #include "../Objects/ShaderProgram.h"
 
 void glfwErrorCallback(int error, const char* description) {
 	std::cout << "[ERROR] : " << description << "\n";
+}
+
+void glfwResizeCallback(GLFWwindow* g_window, int width, int height) {
+	glViewport(0, 0, width, height);
+
+	OpenGL::Window* glWindow = static_cast<OpenGL::Window*>(glfwGetWindowUserPointer(g_window));
+	glWindow->OnResize.invoke(width, height);
 }
 
 namespace OpenGL {
@@ -35,7 +43,18 @@ namespace OpenGL {
 			GL_LOG_ERROR("There was an error creating the GLFW window.");
 		}
 
+		m_icon = new GLFWimage();
+		m_icon->pixels = nullptr;
+		m_icon->width = 0;
+		m_icon->height = 0;
+
 		glfwMakeContextCurrent(m_window);
+
+		glfwSetWindowUserPointer(m_window, this);
+
+		if (glfwSetFramebufferSizeCallback(m_window, glfwResizeCallback)) {
+			GL_LOG_ERROR("There was an error setting the GLFW resize callback.");
+		}
 
 		if (glewInit() != GLEW_OK) {
 			GL_LOG_ERROR("There was an error initializing GLEW.");
@@ -47,6 +66,7 @@ namespace OpenGL {
 
 	Window::~Window() {
 		glfwDestroyWindow(m_window);
+		delete m_icon;
 		glfwTerminate();
 	}
 
@@ -58,16 +78,33 @@ namespace OpenGL {
 		glfwPollEvents();
 	}
 
+	glm::vec2 Window::getSize() {
+		int width = -1;
+		int height = -1;
+		glfwGetWindowSize(m_window, &width, &height);
+
+		return glm::vec2((float)width, (float)height);
+	}
+
 	void Window::clear(const Color& color) {
 		GL_CALL(glClearColor(color.r, color.g, color.b, color.a));
+		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	}
 
 	void Window::clear() {
 		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	}
 
-	void Window::draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program)
+	void Window::setIcon(const TextureSrc& iconSrc)
 	{
+		m_icon->width = iconSrc.width;
+		m_icon->height = iconSrc.height;
+		m_icon->pixels = iconSrc.data;
+
+		glfwSetWindowIcon(m_window, 1, m_icon);
+	}
+
+	void Window::draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program) {
 		program.bind();
 		vao.bind();
 		ibo.bind();

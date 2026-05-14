@@ -30,6 +30,7 @@
     <ClInclude Include="Utils\Types.h" />
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Utils\Path.h" />
+    <ClInclude Include="Utils\Event.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Objects\ShaderProgram.inl" />
