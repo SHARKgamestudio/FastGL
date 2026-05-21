@@ -62,6 +62,12 @@ namespace OpenGL {
 
 		GL_CALL(glEnable(GL_BLEND));
 		GL_CALL(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+
+
+		// save current window transforms
+		glfwGetWindowPos(m_window, &posX, &posY);
+		glfwGetWindowSize(m_window, &sizeX, &sizeY);
+		m_mode = MODE_WINDOWED;
 	}
 
 	Window::~Window() {
@@ -95,13 +101,78 @@ namespace OpenGL {
 		GL_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	}
 
-	void Window::setIcon(const TextureSrc& iconSrc)
-	{
+	void Window::setIcon(const TextureSrc& iconSrc) {
 		m_icon->width = iconSrc.width;
 		m_icon->height = iconSrc.height;
 		m_icon->pixels = iconSrc.data;
 
 		glfwSetWindowIcon(m_window, 1, m_icon);
+	}
+
+	void Window::setWindowMode(WinMode mode) {
+		m_mode = mode;
+
+		switch (mode) {
+		case MODE_WINDOWED: {
+			// restore window decorations
+			glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_TRUE);
+
+			// reset window state to previous state
+			glfwSetWindowMonitor(m_window, nullptr, posX, posY, sizeX, sizeY, 0);
+		}
+		break;
+		case MODE_FULLSCREEN: {
+			// get monitor properties (such as resolution)
+			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+
+			if (monitor == nullptr) {
+				GL_LOG_ERROR("There was an error getting the GLFW monitor.");
+			}
+
+			// save current window transforms
+			glfwGetWindowPos(m_window, &posX, &posY);
+			glfwGetWindowSize(m_window, &sizeX, &sizeY);
+
+			// get resolution of monitor
+			const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+			if (mode == nullptr) {
+				GL_LOG_ERROR("There was an error getting the GLFW video mode.");
+			}
+
+			// switch to full screen
+			glfwSetWindowMonitor(m_window, monitor, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+		}
+		break;
+		case MODE_BORDERLESS: {
+			// get monitor properties (such as resolution)
+			GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+
+			if (monitor == nullptr) {
+				GL_LOG_ERROR("There was an error getting the GLFW monitor.");
+			}
+
+			// save current window transforms
+			glfwGetWindowPos(m_window, &posX, &posY);
+			glfwGetWindowSize(m_window, &sizeX, &sizeY);
+
+			// get resolution of monitor
+			const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+
+			if (mode == nullptr) {
+				GL_LOG_ERROR("There was an error getting the GLFW video mode.");
+			}
+
+			// remove window decorations
+			glfwSetWindowAttrib(m_window, GLFW_DECORATED, GLFW_FALSE);
+
+			// switch to borderless fullscreen
+			glfwSetWindowMonitor(m_window, nullptr, 0, 0, mode->width, mode->height, GLFW_DONT_CARE);
+		}
+		break;
+		default:
+		break;
+		}
 	}
 
 	void Window::draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program) {
@@ -110,6 +181,14 @@ namespace OpenGL {
 		ibo.bind();
 
 		GL_CALL(glDrawElements(GL_TRIANGLES, ibo.getDataCount(), GL_UNSIGNED_INT, nullptr));
+	}
+
+	GLFWwindow* Window::getHandle() const {
+		return m_window;
+	}
+
+	Window::WinMode Window::getWindowMode() const {
+		return m_mode;
 	}
 
 	void Window::swapBuffers() {

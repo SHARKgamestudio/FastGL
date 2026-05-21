@@ -11,23 +11,28 @@
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
 
-OpenGL::Window* g_window = nullptr;
-OpenGL::VAO* g_vao = nullptr;
-OpenGL::IBO* g_ibo = nullptr;
-OpenGL::ShaderProgram* g_program = nullptr;
+#include <Windows.h>
 
-void render() {
-	g_window->clear(OpenGL::Color{ 0.102f, 0.102f, 0.109f, 1.000f });
-	g_window->draw(*g_vao, *g_ibo, *g_program);
-	g_window->swapBuffers();
+
+
+
+#include <GLFW/glfw3.h>
+
+
+
+
+void render(OpenGL::Window& window, OpenGL::VAO& vao, OpenGL::IBO& ibo, OpenGL::ShaderProgram& program) {
+	window.clear(OpenGL::Color{ 0.102f, 0.102f, 0.109f, 1.000f });
+	window.draw(vao, ibo, program);
+	window.swapBuffers();
 }
 
-void update_matrices(int width, int height) {
+void update_matrices(int width, int height, OpenGL::ShaderProgram program) {
 	float ratio = static_cast<float>(width) / static_cast<float>(height);
 	glm::mat4 projection = glm::ortho(-ratio, ratio, -1.0f, 1.0f, -1.0f, 1.0f);
 
-	g_program->bind();
-	g_program->setUniform<glm::mat4>("u_Mvp", projection);
+	program.bind();
+	program.setUniform<glm::mat4>("u_Mvp", projection);
 }
 
 int main() {
@@ -64,13 +69,11 @@ int main() {
 
 	// CREATING THE WINDOW AND CONTEXT
 	OpenGL::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE);
-	g_window = &window;
 
 	window.setIcon(icon_src);
 
 	// CREATING VRAM OBJECTS
 	OpenGL::VAO vao;
-	g_vao = &vao;
 
 	OpenGL::VBO vbo(sizeof(vertices), vertices, OpenGL::DrawType::STATIC);
 
@@ -78,10 +81,9 @@ int main() {
 	vbl.addElement<float>(2);
 	vbl.addElement<float>(2);
 
-	g_vao->addBuffer(vbo, vbl);
+	vao.addBuffer(vbo, vbl);
 
 	OpenGL::IBO ibo(6, indices, OpenGL::DrawType::STATIC);
-	g_ibo = &ibo;
 
 	// COMPILING SHADERS
 	OpenGL::Shader vert(shader_src.vert, OpenGL::ShaderType::VERTEX);
@@ -89,7 +91,6 @@ int main() {
 
 	// CREATING SHADER PROGRAM
 	OpenGL::ShaderProgram program;
-	g_program = &program;
 	program.attachShader(vert);
 	program.attachShader(frag);
 
@@ -99,15 +100,24 @@ int main() {
 	OpenGL::Texture texture(texture_src);
 	texture.bind();
 
-	update_matrices(WINDOW_WIDTH, WINDOW_HEIGHT);
-	window.OnResize.addListener([](int width, int height) {
-		update_matrices(width, height);
-		render();
+	update_matrices(WINDOW_WIDTH, WINDOW_HEIGHT, program);
+	window.OnResize.addListener([&](int width, int height) {
+		update_matrices(width, height, program);
+		render(window, vao, ibo, program);
 	});
+
+	window.setWindowMode(OpenGL::Window::MODE_BORDERLESS);
 
 	while (!window.shouldClose()) {
 		window.pollEvents();
-		render();
+		render(window, vao, ibo, program);
+
+		int state = glfwGetKey(window.getHandle(), GLFW_KEY_E);
+		if (state == GLFW_PRESS) {
+			window.setWindowMode(
+				window.getWindowMode() == OpenGL::Window::MODE_BORDERLESS
+					? OpenGL::Window::MODE_WINDOWED : OpenGL::Window::MODE_BORDERLESS);
+		}
 	}
 
 	return 0;

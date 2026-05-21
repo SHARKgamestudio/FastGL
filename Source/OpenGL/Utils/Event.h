@@ -1,13 +1,14 @@
 #pragma once
 
 #include <vector>
+#include <functional>
 
 namespace OpenGL {
 	template <typename ...Args>
 	struct Event {
 		struct ListenerBase;
 
-		using funcptr = void(*)(Args...);
+		using funcptr = std::function<void(Args...)>; // Uses std::functional for type erasure / lambda capture
 		template <class C> using methodptr = void(C::*)(Args...);
 		template <class C> using cmethodptr = void(C::*)(Args...) const;
 

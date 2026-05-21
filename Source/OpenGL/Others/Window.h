@@ -43,6 +43,12 @@ namespace OpenGL {
 	/// </summary>
 	class Window {
 	public:
+		enum WinMode : char {
+			MODE_WINDOWED	= 0,
+			MODE_FULLSCREEN	= 1,
+			MODE_BORDERLESS	= 2,
+		};
+
 		Window(unsigned int width, unsigned int height, const char* title);
 		~Window();
 
@@ -81,6 +87,8 @@ namespace OpenGL {
 
 		void setIcon(const TextureSrc& iconSrc);
 
+		void setWindowMode(WinMode mode);
+
 		/// <summary>
 		/// Draws the given IBO indices of the VAO using the given ShaderProgram.
 		/// <para> This is just an abstraction of 'glDrawElements', you dont need to use this.</para>
@@ -91,8 +99,17 @@ namespace OpenGL {
 		/// <param name="program">Reference to the ShaderProgram to use for drawing.</param>
 		void draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program);
 
+		GLFWwindow* getHandle() const;
+
+		WinMode getWindowMode() const;
+
 	private:
 		GLFWwindow* m_window;
 		GLFWimage* m_icon;
+
+		WinMode m_mode;
+
+		int posX, posY;
+		int sizeX, sizeY;
 	};
 }
