@@ -43,6 +43,10 @@ namespace OpenGL {
 	/// </summary>
 	class Window {
 	public:
+		/// <summary>
+		/// Simple enum defining the window display mode.
+		/// <para> Can be overridden by OS-specific window decoration commands. </para>
+		/// </summary>
 		enum WinMode : char {
 			MODE_WINDOWED	= 0,
 			MODE_FULLSCREEN	= 1,
@@ -52,6 +56,10 @@ namespace OpenGL {
 		Window(unsigned int width, unsigned int height, const char* title);
 		~Window();
 
+		/// <summary>
+		/// Event that fires each frames while the window is being resized.
+		/// <para> Usually used to keep rendering during window resizing, since the event loop stalls during this operation. </para>
+		/// </summary>
 		Event<int, int> OnResize;
 
 		/// <summary>
@@ -67,8 +75,9 @@ namespace OpenGL {
 		void pollEvents();
 
 		/// <summary>
-		/// Get the Width & Height of the window (in px).
+		/// Get the current size of the window.
 		/// </summary>
+		/// <returns> Returns the width & height of the window (in px).</returns>
 		glm::vec2 getSize();
 
 		/// <summary>
@@ -85,9 +94,23 @@ namespace OpenGL {
 		/// </summary>
 		void clear();
 
+		/// <summary>
+		/// Set the window icon in both the taskbar and title bar.
+		/// </summary>
+		/// <param name="iconSrc">Reference to the TextureSource to use.</param>
 		void setIcon(const TextureSrc& iconSrc);
 
+		/// <summary>
+		/// Set the window display mode.
+		/// </summary>
+		/// <param name="mode">Display mode to use, options are : windowed, fullscreen, borderless-fullscreen.</param>
 		void setWindowMode(WinMode mode);
+
+		/// <summary>
+		/// Get the current window display mode.
+		/// </summary>
+		/// <returns> Returns the display mode, options are : windowed, fullscreen, borderless-fullscreen.</returns>
+		WinMode getWindowMode() const;
 
 		/// <summary>
 		/// Draws the given IBO indices of the VAO using the given ShaderProgram.
@@ -99,10 +122,11 @@ namespace OpenGL {
 		/// <param name="program">Reference to the ShaderProgram to use for drawing.</param>
 		void draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program);
 
+		/// <summary>
+		/// Gets the internal GLFW window handle.
+		/// </summary>
+		/// <returns>  Returns a pointer to the internal GLFW window opaque structure used by this instance of the window abstraction class. </returns>
 		GLFWwindow* getHandle() const;
-
-		WinMode getWindowMode() const;
-
 	private:
 		GLFWwindow* m_window;
 		GLFWimage* m_icon;

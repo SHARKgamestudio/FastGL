@@ -2,6 +2,7 @@
 
 #include "Utils/Error.h"
 #include "Utils/Types.h"
+#include "Utils/Event.h"
 #include "Utils/Path.h"
 
 #include "Others/Window.h"

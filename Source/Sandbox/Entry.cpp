@@ -13,14 +13,6 @@
 
 #include <Windows.h>
 
-
-
-
-#include <GLFW/glfw3.h>
-
-
-
-
 void render(OpenGL::Window& window, OpenGL::VAO& vao, OpenGL::IBO& ibo, OpenGL::ShaderProgram& program) {
 	window.clear(OpenGL::Color{ 0.102f, 0.102f, 0.109f, 1.000f });
 	window.draw(vao, ibo, program);
@@ -106,18 +98,9 @@ int main() {
 		render(window, vao, ibo, program);
 	});
 
-	window.setWindowMode(OpenGL::Window::MODE_BORDERLESS);
-
 	while (!window.shouldClose()) {
 		window.pollEvents();
 		render(window, vao, ibo, program);
-
-		int state = glfwGetKey(window.getHandle(), GLFW_KEY_E);
-		if (state == GLFW_PRESS) {
-			window.setWindowMode(
-				window.getWindowMode() == OpenGL::Window::MODE_BORDERLESS
-					? OpenGL::Window::MODE_WINDOWED : OpenGL::Window::MODE_BORDERLESS);
-		}
 	}
 
 	return 0;
