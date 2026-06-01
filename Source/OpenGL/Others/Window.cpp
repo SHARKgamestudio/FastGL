@@ -81,6 +81,12 @@ namespace OpenGL {
 	}
 
 	void Window::pollEvents() {
+		previous = current;
+		current = std::chrono::high_resolution_clock::now();
+
+		double raw_delta = (current - previous).count() / 1000000000.0;
+		delta = static_cast<float>(raw_delta);
+
 		glfwPollEvents();
 	}
 
@@ -181,6 +187,18 @@ namespace OpenGL {
 		ibo.bind();
 
 		GL_CALL(glDrawElements(GL_TRIANGLES, ibo.getDataCount(), GL_UNSIGNED_INT, nullptr));
+	}
+
+	void Window::drawInstanced(const VAO& vao, const IBO& ibo, const ShaderProgram& program, int count) {
+		program.bind();
+		vao.bind();
+		ibo.bind();
+
+		GL_CALL(glDrawElementsInstanced(GL_TRIANGLES, ibo.getDataCount(), GL_UNSIGNED_INT, nullptr, count));
+	}
+
+	float Window::getDeltaTime() const {
+		return delta;
 	}
 
 	GLFWwindow* Window::getHandle() const {

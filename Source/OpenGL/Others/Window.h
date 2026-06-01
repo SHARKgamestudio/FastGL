@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include "../Utils/Event.h"
 
 #include <GLM/vec2.hpp>
@@ -123,10 +125,28 @@ namespace OpenGL {
 		void draw(const VAO& vao, const IBO& ibo, const ShaderProgram& program);
 
 		/// <summary>
+		/// Draws the given IBO indices of the VAO using the given ShaderProgram multiple times.
+		/// <para> This is just an abstraction of 'glDrawElementsInstanced', you dont need to use this.</para>
+		/// <para> You can write your own renderer if you want, this is just provided for getting started quickly.</para>
+		/// </summary>
+		/// <param name="vao">Reference to the VAO to draw.</param>
+		/// <param name="ibo">Reference to the IBO defining the indices of the VAO to draw.</param>
+		/// <param name="program">Reference to the ShaderProgram to use for drawing.</param>
+		/// <param name="count">The number of times you want to draw your element.</param>
+		void drawInstanced(const VAO& vao, const IBO& ibo, const ShaderProgram& program, int count);
+
+		/// <summary>
+		/// Get the time the current frame took to process.
+		/// </summary>
+		/// <returns> Returns the time delta as a float, in seconds. </returns>
+		float getDeltaTime() const;
+
+		/// <summary>
 		/// Gets the internal GLFW window handle.
 		/// </summary>
 		/// <returns>  Returns a pointer to the internal GLFW window opaque structure used by this instance of the window abstraction class. </returns>
 		GLFWwindow* getHandle() const;
+
 	private:
 		GLFWwindow* m_window;
 		GLFWimage* m_icon;
@@ -135,5 +155,9 @@ namespace OpenGL {
 
 		int posX, posY;
 		int sizeX, sizeY;
+
+		std::chrono::steady_clock::time_point current;
+		std::chrono::steady_clock::time_point previous;
+		float delta;
 	};
 }
