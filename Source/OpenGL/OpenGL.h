@@ -11,6 +11,7 @@
 #include "Objects/VBO.h"
 #include "Objects/IBO.h"
 #include "Objects/VBL.h"
+#include "Objects/FrameBuffer.h"
 
 #include "Objects/Texture.h"
 

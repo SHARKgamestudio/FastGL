@@ -22,6 +22,7 @@ namespace OpenGL {
 	/// Reads an image file from disk and returns every raw-data needed to load it in a GPU texture.
 	/// </summary>
 	/// <param name="path">The file-path to the image source (can be .png or .jpg).</param>
+	/// <param name="flipY">Whether to flip the image vertically (OpenGL's texture coordinate system is flipped compared to most image formats).</param>
 	/// <returns>A TextureSrc object, containing raw pixels and metadata. </returns>
 	TextureSrc getTextureSrcFromFile(const std::string& path, bool flipY = false);
 
@@ -32,7 +33,10 @@ namespace OpenGL {
 	class Texture : public Object, IBindable {
 	public:
 		Texture(const TextureSrc& src);
+		Texture(int width, int height);
 		~Texture();
+
+		void resize(int width, int height);
 
 		void bind() const override;
 		void unbind() const override;

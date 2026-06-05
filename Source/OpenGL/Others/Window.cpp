@@ -43,6 +43,8 @@ namespace OpenGL {
 			GL_LOG_ERROR("There was an error creating the GLFW window.");
 		}
 
+		glfwSetWindowSizeLimits(m_window, MIN_WIDTH, MIN_HEIGHT, GLFW_DONT_CARE, GLFW_DONT_CARE);
+
 		m_icon = new GLFWimage();
 		m_icon->pixels = nullptr;
 		m_icon->width = 0;

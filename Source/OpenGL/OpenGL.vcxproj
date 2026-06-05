@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="Common\IBindable.cpp" />
     <ClCompile Include="Common\Object.cpp" />
+    <ClCompile Include="Objects\FrameBuffer.cpp" />
     <ClCompile Include="Objects\IBO.cpp" />
     <ClCompile Include="Objects\Shader.cpp" />
     <ClCompile Include="Objects\ShaderProgram.cpp" />
@@ -28,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="Common\IBindable.h" />
     <ClInclude Include="Common\Object.h" />
+    <ClInclude Include="Objects\FrameBuffer.h" />
     <ClInclude Include="Utils\Event.h" />
     <ClInclude Include="Objects\IBO.h" />
     <ClInclude Include="Objects\Shader.h" />

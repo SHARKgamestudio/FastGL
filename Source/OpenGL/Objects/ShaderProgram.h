@@ -34,6 +34,11 @@ namespace OpenGL {
 		/// </summary>
 		/// <param name="shader">Reference to the Shader object to attach.</param>
 		void attachShader(const Shader& shader);
+		/// <summary>
+		/// Detaches a Shader object to the shader program.
+		/// </summary>
+		/// <param name="shader">Reference to the Shader object to detach.</param>
+		void detachShader(const Shader& shader);
 
 		void bind() const override;
 		void unbind() const override;

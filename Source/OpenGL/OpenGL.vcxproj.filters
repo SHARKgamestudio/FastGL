@@ -14,6 +14,7 @@
     <ClCompile Include="Utils\Error.cpp" />
     <ClCompile Include="Utils\Types.cpp" />
     <ClCompile Include="Utils\Path.cpp" />
+    <ClCompile Include="Objects\FrameBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common\IBindable.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="OpenGL.h" />
     <ClInclude Include="Utils\Path.h" />
     <ClInclude Include="Utils\Event.h" />
+    <ClInclude Include="Objects\FrameBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Objects\ShaderProgram.inl" />

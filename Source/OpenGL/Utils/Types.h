@@ -48,6 +48,15 @@ namespace OpenGL {
 	};
 
 	/// <summary>
+	/// Types of buffers that can be attached to a FrameBuffer object.
+	/// </summary>
+	enum class AttachmentType {
+		COLOR = 0x8CE0,
+		DEPTH = 0x8D00,
+		STENCIL = 0x8D20
+	};
+
+	/// <summary>
 	/// Types of log messages that the logger can output.
 	/// </summary>
 	enum class LogType {

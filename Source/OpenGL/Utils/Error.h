@@ -50,6 +50,41 @@
 #define GL_CALL(func) func
 #endif
 
+
+// TEMPORARY, TODO : REMOVE
+#ifdef _DEBUG
+
+#include <GL/glew.h>
+
+#define _LIST_OF_OPENGL_ERRORS					\
+		X(GL_NO_ERROR)							\
+		X(GL_INVALID_VALUE)						\
+		X(GL_INVALID_OPERATION)					\
+		X(GL_STACK_OVERFLOW)					\
+		X(GL_STACK_UNDERFLOW)					\
+		X(GL_OUT_OF_MEMORY)						\
+		X(GL_INVALID_FRAMEBUFFER_OPERATION)		\
+		X(GL_CONTEXT_LOST)						\
+		X(GL_TABLE_TOO_LARGE)
+
+// Returns a string of the X Macro Error
+static const char* _glStringError(const GLenum err) {
+	switch (err) {
+#define X(name) case name: return #name;
+		_LIST_OF_OPENGL_ERRORS
+#undef X
+	}
+	return "UNDEFINED";
+}
+
+#define GL_STRING_ERROR(error) _glStringError(error)
+
+#else
+
+#define GL_STRING_ERROR(error) ""
+
+#endif
+
 #include "Types.h"
 
 namespace OpenGL {
@@ -66,7 +101,7 @@ namespace OpenGL {
 	/// <param name="file">File name where the function is called.</param>
 	/// <param name="line">Line number where the function is called.</param>
 	/// <returns>True if no errors were found, false otherwise.</returns>
-	bool CheckError(const char* funcptr, const char* file, int line);
+	bool CheckError(const char* function, const char* file, int line);
 
 	/// <summary>
 	/// Logs a message with custom format and colors based on the log type.
@@ -77,5 +112,5 @@ namespace OpenGL {
 	/// <param name="function">Name of the function for which the check is performed.</param>
 	/// <param name="file">File name where the function is called.</param>
 	/// <param name="line">Line number where the function is called.</param>
-	void Log(const char* message, LogType type, const char* funcptr, const char* file, int line);
+	void Log(const char* message, LogType type, const char* function, const char* file, int line);
 }

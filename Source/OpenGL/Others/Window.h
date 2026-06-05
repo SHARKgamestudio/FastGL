@@ -11,13 +11,13 @@
 /// <para> And you are not an idiot, are you ? </para>
 /// <para> ..Are you ? </para>
 /// </summary>
-#define MIN_WIDTH	64
+#define MIN_WIDTH	240
 /// <summary>
 /// Dont mind this, it's just to avoid idiots from having fun with the window size.
 /// <para> And you are not an idiot, are you ? </para>
 /// <para> ..Are you ? </para>
 /// </summary>
-#define MIN_HEIGHT	64
+#define MIN_HEIGHT	135
 
 struct GLFWwindow;
 struct GLFWimage;

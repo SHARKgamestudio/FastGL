@@ -23,6 +23,10 @@ namespace OpenGL {
 		GL_CALL(glAttachShader(id, shader.getID()));
 	}
 
+	void ShaderProgram::detachShader(const Shader& shader) {
+		GL_CALL(glDetachShader(id, shader.getID()));
+	}
+
 	void ShaderProgram::bind() const {
 		#ifdef GL_AUTO_LINK_PROGRAM
 		link();
