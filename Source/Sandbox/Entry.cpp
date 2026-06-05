@@ -11,8 +11,6 @@
 #include <GLM/glm.hpp>
 #include <GLM/gtc/matrix_transform.hpp>
 
-#include <Windows.h>
-
 void render(OpenGL::Window& window, OpenGL::VAO& vao, OpenGL::IBO& ibo, OpenGL::ShaderProgram& program) {
 	window.clear(OpenGL::Color{ 0.102f, 0.102f, 0.109f, 1.000f });
 	window.draw(vao, ibo, program);
@@ -92,12 +90,14 @@ int main() {
 	OpenGL::Texture texture(texture_src);
 	texture.bind();
 
+	// CONFIGURING WINDOW RESIZE CALLBACKS
 	update_matrices(WINDOW_WIDTH, WINDOW_HEIGHT, program);
 	window.OnResize.addListener([&](int width, int height) {
 		update_matrices(width, height, program);
 		render(window, vao, ibo, program);
 	});
 
+	// RENDER LOOP
 	while (!window.shouldClose()) {
 		window.pollEvents();
 		render(window, vao, ibo, program);
